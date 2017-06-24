@@ -2,7 +2,7 @@
 % generate kotte model and find initial equilibrium point followed by
 % continuation to identify bistable region
 % build stoichioemtrc matrices
-if ~exist('C:\Users\shyam\Documents\Courses\CHE1125Project\IntegratedModels\KineticModel\Kotte2014\Kotte2014.txt')
+if ~exist('C:\Users\shyam\Documents\Courses\CHE1125Project\kbistable\kotte-bistable\Kotte2014\Kotte2014.txt')
     status = 2;
     fprintf('\nLinux System\n');
 else 
@@ -10,8 +10,8 @@ else
     fprintf('\nWindows System\n');
 end
 if status == 1
-    rxfname = 'C:\Users\shyam\Documents\Courses\CHE1125Project\IntegratedModels\KineticModel\Kotte2014\Kotte2014.txt';
-    cnfname = 'C:\Users\shyam\Documents\Courses\CHE1125Project\IntegratedModels\KineticModel\Kotte2014\Kotte2014C.txt';
+    rxfname = 'C:\Users\shyam\Documents\Courses\CHE1125Project\kbistable\kotte-bistable\Kotte2014\Kotte2014.txt';
+    cnfname = 'C:\Users\shyam\Documents\Courses\CHE1125Project\kbistable\kotte-bistable\Kotte2014\Kotte2014C.txt';
 elseif status == 2
     rxfname = '/home/shyam/Documents/MATLAB/Code/KineticModel/Kotte2014/Kotte2014.txt';
     cnfname = '/home/shyam/Documents/MATLAB/Code/KineticModel/Kotte2014/Kotte2014C.txt';
