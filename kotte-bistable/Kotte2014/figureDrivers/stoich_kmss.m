@@ -3,8 +3,8 @@
 % change uptake rates on line 16 (1 or 2 a.u.) to correct envelopes
 % build stoichioemtrc matrices
 addpath(genpath('C:\Users\shyam\Documents\Courses\CHE1125Project\IntegratedModels\KineticModel'));
-rxfname = 'C:\Users\shyam\Documents\Courses\CHE1125Project\IntegratedModels\KineticModel\Kotte2014\Kotte2014.txt';
-cnfname = 'C:\Users\shyam\Documents\Courses\CHE1125Project\IntegratedModels\KineticModel\Kotte2014\Kotte2014C.txt';
+rxfname = 'C:\Users\shyam\Documents\Courses\CHE1125Project\kbistable\kotte-bistable\Kotte2014\Kotte2014.txt';
+cnfname = 'C:\Users\shyam\Documents\Courses\CHE1125Project\kbistable\kotte-bistable\Kotte2014\Kotte2014C.txt';
 
 % create model structure
 [FBAmodel,parameter,variable,nrxn,nmetab] = modelgen(rxfname);
