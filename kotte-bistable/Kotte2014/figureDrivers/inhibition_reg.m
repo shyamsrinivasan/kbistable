@@ -85,7 +85,7 @@ for iid = 1:1
           
     % continue on acetate for all equilibirum solutions to different
     % parameter combinations
-    [s,mssid,nss] = setupMATCONT(@KotteMATCONT,@Kottecont_fluxcalc,...
+    [s,mssid,nss] = setupMATCONT(@KotteMATCONT,@Kottecont_fluxcalc,@getaxislabels,...
                                 allxeqlac,allpvec,ap,model,fluxg,npts);
     
     siid.(['iid' num2str(iid)]) = s;
