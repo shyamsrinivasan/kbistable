@@ -199,15 +199,15 @@ for iac = 1:length(acetate)
     
     hc1 = figure;
     hold on
-    plot(allpvec(:,idp),xeqac(1,:),'Color',colorSpec{1},'LineWidth',2);
-    plot(allpvec(:,idp),xeqac(4,:),'Color',colorSpec{2},'LineWidth',2);
+    plot(allpvec(:,idp),xeqac(1,:),'Marker','.','Color',colorSpec{1},'LineWidth',2);
+    plot(allpvec(:,idp),xeqac(4,:),'Marker','.','Color',colorSpec{2},'LineWidth',2);
     xlabel('KeFDP a.u.');
     ylabel('pep a.u.');
     
     hc2 = figure;
     hold on
-    plot(allpvec(:,idp),feqac(5,:),'Color',colorSpec{1},'LineWidth',2);
-    plot(allpvec(:,idp),feqac(10,:),'Color',colorSpec{2},'LineWidth',2);
+    plot(allpvec(:,idp),feqac(5,:),'Marker','.','Color',colorSpec{1},'LineWidth',2);
+    plot(allpvec(:,idp),feqac(10,:),'Marker','.','Color',colorSpec{2},'LineWidth',2);
     xlabel('KeFDP a.u.');
     ylabel('v4 a.u.');
 end
