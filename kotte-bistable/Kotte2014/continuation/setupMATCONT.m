@@ -10,7 +10,7 @@ if nargin<11
     fig = 0;
 end
 if nargin<10
-    bfpts = 800;
+    bfpts = 1200;
 end
 
 for ipt = 1:npts
