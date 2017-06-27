@@ -19,7 +19,7 @@ xss = [xeq1 xeq2];
 % run inhibition parameter perturbations
 % sample parameters indicated by indices in idp
 % cmb = [.05;.125;.25;.5;2;4];
-cmb = linspace(.05,4,100)';
+cmb = linspace(.05,1,50)';
    
 idp = [7];
 type = 'together';
