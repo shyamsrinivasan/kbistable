@@ -95,6 +95,13 @@ end
 
 %maximization
 [vmax,vobj,Maxflag] = cplexlp(-cprod(:),[],[],S,b,vl,vu);
+
+% use opti - beta
+% e = zeros(length(b),1); % constraint type
+% opti_opts = optiset('solver','clp','display','final');
+% opti_prob =...
+% opti('f',-cprod(:),'mix',S,b,e,'bounds',vl,vu,'options',opti_opts);
+% [vmax,vobj,Maxflag] = solve(opti_prob);
 if Maxflag > 0
     if abs(vobj)<1e-4
         vobj = 0;
@@ -109,6 +116,13 @@ vLPmax.flag = Maxflag;
 
 %minimization
 [vmin,vobj,Minflag] = cplexlp(cprod(:),[],[],S,b,vl,vu);
+
+% use opti - beta
+% % constraint type
+% e = zeros(length(b),1);
+% opti_opts = optiset('solver','clp','display','final');
+% opti_prob = opti('f',cprod(:),'mix',S,b,e,'bounds',vl,vu);
+% [vmin,vobj,Minflag] = solve(opti_prob);
 if Minflag > 0
     if abs(vobj)<1e-4
         vobj = 0;
