@@ -41,7 +41,7 @@ model.PM(ac-length(orig_saddle)) = 0.01;
 [~,allxeqlac] = solveODEonly(npts,M,model,allpvec,opts,tspan);
 
 %% and continue on acetate
-[s,mssid,nss] = setupMATCONT(@KotteMATCONT,@Kottecont_fluxcalc,@getaxislabels,...
+[s,mssid,nss] = setupMATCONT(@KotteMATCONT,@Kottecont_fluxcalc,@getKotteaxislabels,...
                             allxeqlac,allpvec,ap,model,fluxg,npts,1500);
 
 %% get boundaries of acetate bistability
