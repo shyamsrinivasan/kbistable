@@ -61,9 +61,15 @@ flux(1,:) = kEcat.*M(enz,:).*M(ac,:)./(M(ac,:)+KEacetate);
 % E(FBP) for J (%FBP ---| Cra and Cra ---> E)
 flux(2,:) = vemax.*(1-1./(1+(KeFBP./M(fdp,:)).^ne));
 
+% constitutive expression of E (flux 2 is constant)
+% flux(2) = vemax;
+
 % vFbp(PEP,FBP)
 ratio = 1+M(fdp,:)./KFbpFBP;
 flux(3,:) = vFbpmax.*(ratio-1).*(ratio).^3./(ratio.^4+Lfbp.*(1+M(pep,:)./KFbpPEP).^(-4));
+
+% vFbp w/o regulation for heterlogous expression
+% flux(3,:) = vFbpmax.*M(fdp,:)./(1+M(fdp,:)./KFbpFBP);
 
 % vEX(PEP)
 flux(4,:) = vEXmax.*M(pep,:)./(M(pep,:)+KEXPEP);
