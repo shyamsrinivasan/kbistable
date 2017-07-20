@@ -48,7 +48,7 @@ for kndex = 1:length(xindex)
             LineP.Color = 'k';
         end
     end
-    LineP.LineWidth = 3;
+    LineP.LineWidth = 1.5;
     LPval = y(:,xindex(2:end-1));
     
     if length(idx)<=2
@@ -143,7 +143,7 @@ function hfig = plot3Dbifurcation(xval,yval,zval,xid,yid,zid,...
                                 LPval,pid,hfig,LineP,axisfun)
 if ~isempty(hfig)
     figure(hfig);    
-    hl = plot3(xval,yval,zval);
+    hl = line(xval,yval,zval);
     set(get(hl,'Parent'),'NextPlot','add');
 else
     hl = plot3(xval,yval,zval);
@@ -161,14 +161,36 @@ else
     xlabel={};ylabel={};zlabel={};
 end
 
-plot3(LPval(xid,:),LPval(yid,:),LPval(zid,:),'LineStyle','none',...
+line(LPval(xid,:),LPval(yid,:),LPval(zid,:),'LineStyle','none',...
                              'Marker','o','MarkerEdgeColor','r',...
                              'MarkerFaceColor','r','MarkerSize',6);
-setproperties(3,gca,xlabel,ylabel,zlabel);  
+axlims = zeros(3,2);
+% x-limits
+if max(xval)>0
+    axlims(1,:) = [0 max(xval)];
+else
+    axlims(1,:) = [0 1];
+end
+% y-limits
+if max(yval)>0
+    axlims(2,:) = [0 max(yval)];
+else
+    axlims(2,:) = [0 1];
+end
+% z-limit
+if max(zval)>0
+    axlims(3,:) = [0 max(zval)];
+else
+    axlims(3,:) = [0 1];
+end
+setproperties(3,gca,xlabel,ylabel,axlims,zlabel);  
 end
 
-function setproperties(plotype,hsfig,xlabel,ylabel,zlabel)
-if nargin < 5
+function setproperties(plotype,hsfig,xlabel,ylabel,axlims,zlabel)
+if nargin<5 
+    axlims = [];
+end
+if nargin < 6
     zlabel = {};
 end
 % set axis properties
@@ -190,6 +212,13 @@ axesP.LineWidth = 1.5;
 axesP.TickLength = [0.01 0.01];
 axesP.XColor = [.1 .1 .1];
 axesP.YColor = [.1 .1 .1];
+if ~isempty(axlims)
+    axesP.XLim = axlims(1,:);
+    axesP.YLim = axlims(2,:);
+    if plotype==3
+        axesP.ZLim = axlims(3,:);
+    end
+end
 if plotype == 3
     set(gca,axesP);
 else
