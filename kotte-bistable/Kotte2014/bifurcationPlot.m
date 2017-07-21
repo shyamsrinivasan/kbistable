@@ -137,6 +137,7 @@ setproperties(2,gca,xlabel,ylabel);
 if ~isempty(annot)
     text(xval(end),yval(end),annot.text,'FontSize',20);
 end
+drawnow
 end
 
 function hfig = plot3Dbifurcation(xval,yval,zval,xid,yid,zid,...
@@ -184,6 +185,7 @@ else
     axlims(3,:) = [0 1];
 end
 setproperties(3,gca,xlabel,ylabel,axlims,zlabel);  
+drawnow
 end
 
 function setproperties(plotype,hsfig,xlabel,ylabel,axlims,zlabel)
