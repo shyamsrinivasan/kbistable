@@ -53,7 +53,7 @@ end
 %% 3-d bifurcation diagram
 % acetate vs v4max vs pep/v4
 recalcdata = struct();
-figure
+hfig = figure;
 hold on
 for ip = 1:npar    
     if ismember(ip,mssid)        
@@ -75,7 +75,19 @@ for ip = 1:npar
             stabilityInfo(@Kotte_givenNLAE,alleqpts(:,ipos)',model,allpvec(ipos,:));
         end
         % draw 3-d bifurcation plot
-        bifurcationPlot([alleqpts;allpvec(:,9);allpvec(:,ap)],);
+%         bifurcationPlot([alleqpts;allpvec(:,9)';allpvec(:,ap)'],s1.s1,recalcdata.f1,[4 5 1],[],1,hfig);
+        posbifurplot([alleqpts;allpvec(:,9)';allpvec(:,ap)'],s1.s1,recalcdata.f1,[4 5 1],[],1,hfig);
+        xlabel('acetate a.u.');
+        ylabel('V4max a.u.');
+        zlabel('pep a.u.');
     end
 end
+gcf
+% axis([0 2.5 0 1.6 0 1.6]);
+view([116 22]);
+grid on
+
+
+%% 3-d bifurcation diagram - plot only positive values
+
 
