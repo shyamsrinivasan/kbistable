@@ -50,7 +50,7 @@ for ip = 1:npar
     end
 end
 
-%% 3-d bifurcation diagram
+%% 3-d bifurcation diagram - only positive parameter values
 % acetate vs v4max vs pep/v4
 recalcdata = struct();
 hfig = figure;
@@ -89,5 +89,41 @@ grid on
 
 
 %% 3-d bifurcation diagram - plot only positive values
+% acetate vs v4max vs pep/v4
+recalcdata = struct();
+hfig = figure;
+hold on
+for ip = 1:npar    
+    if ismember(ip,mssid)        
+        s1 = s.(['pt' num2str(ip)]);
+        % get only positive parameters
+%         posid = s1.x1(end,:)>=0;
+%         posend = find(posid,1,'last');
+        % get all parameters
+        npts = size(s1.x1,2);
+        allpvec = repmat(pvec,npts,1);
+        allpvec(:,9) = acetate(ip);        
+        allpvec(:,ap) = s1.x1(end,:);
+        alleqpts = s1.x1(1:3,:);
+        allflux = s1.flux(1:5,:);
+        recalcdata.x1 = alleqpts;
+        recalcdata.flux = s1.flux;
+        % recalculate stability info
+        for ipos = 1:npts
+            recalcdata.f1(:,ipos) =...
+            stabilityInfo(@Kotte_givenNLAE,alleqpts(:,ipos)',model,allpvec(ipos,:));
+        end
+        % draw 3-d bifurcation plot
+%         bifurcationPlot([alleqpts;allpvec(:,9)';allpvec(:,ap)'],s1.s1,recalcdata.f1,[4 5 1],[],1,hfig);
+        posbifurplot([allflux;allpvec(:,9)';allpvec(:,ap)'],s1.s1,recalcdata.f1,[6 7 5],[],1,hfig);
+        xlabel('acetate a.u.');
+        ylabel('V4max a.u.');
+        zlabel('v4 a.u.');
+    end
+end
+gcf
+% axis([0 2.5 0 1.6 0 1.6]);
+view([116 22]);
+grid on
 
 
