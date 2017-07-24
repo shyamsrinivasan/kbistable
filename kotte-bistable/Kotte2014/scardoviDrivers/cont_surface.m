@@ -14,7 +14,19 @@ npar = length(v4max);
 allcontpts = struct();
 for ip = 1:npar
     pvec(11) = v4max(ip);
-    contpt = continuation(model,pvec,lambda,9,iguess,opts);
-    allcontpts.(['pt' num2str(ip)]) = contpt;
+    [contpt,fluxpt] = continuation(model,pvec,lambda,9,iguess,opts);
+    allcontpts.(['pt' num2str(ip)]).xc = contpt;
+    allcontpts.(['pt' num2str(ip)]).flx = fluxpt;
 end
+
+%% figures
+figure
+hold on
+plot3(repmat(v4max(7),1,400),lambda,allcontpts.pt7.flx(5,1:400),'r')
+plot3(repmat(v4max(7),1,400),fliplr(lambda),allcontpts.pt7.flx(5,401:end))
+figure
+hold on
+plot3(repmat(v4max(7),1,400),lambda,allcontpts.pt7.xc(1,1:400),'r')
+plot3(repmat(v4max(7),1,400),fliplr(lambda),allcontpts.pt7.xc(1,401:end))
+
 
