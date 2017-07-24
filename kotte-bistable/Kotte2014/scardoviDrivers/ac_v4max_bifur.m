@@ -91,12 +91,15 @@ for ip = 1:npar
         zlabel('v4 a.u.');
         view([116 22]);
         grid on
-        set(0,'CurrentFigure',hfig3);
-        set(gca,'NextPlot','add');
-        line(allpvec(posid,ap)',alleqpts(1,posid),allflux(5,posid));
+%         set(0,'CurrentFigure',hfig3);
+%         set(gca,'NextPlot','add');
+        posbifurplot([alleqpts;allflux(5,:);allpvec(:,ap)'],s1.s1,recalcdata.f1,[5 1 4],[],1,hfig3);
+%         line(allpvec(posid,ap)',alleqpts(1,posid),allflux(5,posid));
         xlabel('V4max a.u.');
         ylabel('pep a.u.');
         zlabel('v4 a.u.');
+        view([116 22]);
+        grid on
     end
 end
 % axis([0 2.5 0 1.6 0 1.6]);
