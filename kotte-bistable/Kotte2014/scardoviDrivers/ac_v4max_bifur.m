@@ -66,7 +66,8 @@ for ip = 1:npar
         % get all parameters
         npts = size(s1.x1,2);
         allpvec = repmat(pvec,npts,1);
-        allpvec(:,9) = acetate(ip);        
+        allpvec(:,9) = acetate(ip);   
+        model.PM(ac-length(xeq)) = acetate(ip);
         allpvec(:,ap) = s1.x1(end,:);
         alleqpts = s1.x1(1:3,:);
         allflux = s1.flux(1:5,:);
