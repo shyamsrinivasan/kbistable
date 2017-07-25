@@ -37,11 +37,11 @@ elseif plotype == 2
         end
     elseif datatype == 3
 %         xlabel = parlist(idx(1)-length(cnclist));
-        xlabel = parlist(idx(3));
+        xlabel = parlist(idx(1));
         ylabel = cnclist(idx(2));
     elseif datatype == 4
 %         xlabel = parlist(idx(1)-length(fluxlist));
-        xlabel = parlist(idx(3));
+        xlabel = parlist(idx(1));
         ylabel = fluxlist(idx(2));    
     end
     zlabel = {};
