@@ -104,25 +104,30 @@ end
 
 if size(LPval,1)>4
     if xid > 5
+        if ~isempty(axisfun)
+            [xlabtxt,ylabtxt] = axisfun(2,4,[xid yid]);
+        else
+            xlabtxt={};ylabtxt={};
+        end
     else
         if ~isempty(axisfun)
-            [xlabel,ylabel] = axisfun(2,1,[xid yid]);
+            [xlabtxt,ylabtxt] = axisfun(2,1,[xid yid]);
         else
-            xlabel={};ylabel={};
+            xlabtxt={};ylabtxt={};
         end
     end
 else
     if xid > 3
         if ~isempty(axisfun)
-            [xlabel,ylabel] = axisfun(2,3,[xid yid pid]);
+            [xlabtxt,ylabtxt] = axisfun(2,3,[xid yid pid]);
         else
-            xlabel = {};ylabel={};
+            xlabtxt = {};ylabtxt={};
         end
     else
         if ~isempty(axisfun)
-            [xlabel,ylabel] = axisfun(2,2,[xid yid]);
+            [xlabtxt,ylabtxt] = axisfun(2,2,[xid yid]);
         else
-            xlabel={};ylabel={};
+            xlabtxt={};ylabtxt={};
         end
     end
 end
@@ -132,7 +137,7 @@ end
 line(LPval(xid,:),LPval(yid,:),'LineStyle','none',...
                              'Marker','o','MarkerEdgeColor','r',...
                              'MarkerFaceColor','r','MarkerSize',6);
-setproperties(2,gca,xlabel,ylabel);
+setproperties(2,gca,xlabtxt,ylabtxt);
 
 if ~isempty(annot)
     text(xval(end),yval(end),annot.text,'FontSize',20);
