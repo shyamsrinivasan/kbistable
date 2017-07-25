@@ -93,6 +93,9 @@ for ip = 1:npar
             recalcdata.f1(:,ipos) =...
             stabilityInfo(@Kotte_givenNLAE,alleqpts(:,ipos)',model,allpvec(ipos,:));
         end
+        % draw 2-d bifurcation plot for different v4max values
+        bifurcationPlot([alleqpts;allpvec(:,ap)'],s1.s1,recalcdata.f1,[4 1]);
+        bifurcationPlot([allflux;allpvec(:,ap)'],s1.s1,recalcdata.f1,[6 5]);
         % draw 3-d bifurcation plot
 %         bifurcationPlot([alleqpts;allpvec(:,9)';allpvec(:,ap)'],s1.s1,recalcdata.f1,[4 5 1],[],1,hfig);
         bifurcationPlot([alleqpts;allpvec(:,11)';allpvec(:,ap)'],s1.s1,recalcdata.f1,[4 5 1],[],1,hfig1);
@@ -119,6 +122,10 @@ for ip = 1:npar
     end
 end
 
+%% save figures
+% gcf
+% fname = 'C:\Users\shyam\Documents\Courses\CHE1125Project\Results\kottedesign\cont_curves\pep_v4_ac_july25';
+% print('-depsc','-painters','-loose',fname)
 
 
 
