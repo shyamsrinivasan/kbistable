@@ -57,11 +57,14 @@ end
 
 %% print bifurcation diagrams for all mss pts
 figh = figure;
+figh2 = figure;
 for ip = 1:npar
     if ismember(ip,mssid)
         % draw bifurcation diagram
         str_data = s.(['pt' num2str(ip)]);
         figh = bifurcationPlot(str_data.x1,str_data.s1,str_data.f1,[4,1],[],[],figh);
+        figh2 = bifurcationPlot([str_data.flux;str_data.x1(end,:)],...
+                                str_data.s1,str_data.f1,[6,5],[],[],figh2);
     end
 end
 
@@ -94,17 +97,22 @@ for ip = 1:npar
             stabilityInfo(@Kotte_givenNLAE,alleqpts(:,ipos)',model,allpvec(ipos,:));
         end
         % draw 2-d bifurcation plot for different v4max values
-        bifurcationPlot([alleqpts;allpvec(:,ap)'],s1.s1,recalcdata.f1,[4 1]);
-        bifurcationPlot([allflux;allpvec(:,ap)'],s1.s1,recalcdata.f1,[6 5]);
+        bifurcationPlot([alleqpts;allpvec(:,ap)'],...
+                        s1.s1,recalcdata.f1,[4 1],@getKotteaxislabels);
+        bifurcationPlot([allflux;allpvec(:,ap)'],...
+                        s1.s1,recalcdata.f1,[6 5],@getKotteaxislabels);
         % draw 3-d bifurcation plot
-%         bifurcationPlot([alleqpts;allpvec(:,9)';allpvec(:,ap)'],s1.s1,recalcdata.f1,[4 5 1],[],1,hfig);
-        bifurcationPlot([alleqpts;allpvec(:,11)';allpvec(:,ap)'],s1.s1,recalcdata.f1,[4 5 1],[],1,hfig1);
+%         bifurcationPlot([alleqpts;allpvec(:,9)';allpvec(:,ap)'],...
+%                         s1.s1,recalcdata.f1,[4 5 1],[],1,hfig);
+        bifurcationPlot([alleqpts;allpvec(:,11)';allpvec(:,ap)'],...
+                        s1.s1,recalcdata.f1,[4 5 1],[],1,hfig1);
         xlabel('V4max a.u.');
         ylabel('acetate a.u.');
         zlabel('pep a.u.');
         view([116 22]);
         grid on
-        bifurcationPlot([allflux;allpvec(:,11)';allpvec(:,ap)'],s1.s1,recalcdata.f1,[6 7 5],[],1,hfig2);
+        bifurcationPlot([allflux;allpvec(:,11)';allpvec(:,ap)'],...
+                        s1.s1,recalcdata.f1,[6 7 5],[],1,hfig2);
         xlabel('V4max a.u.');
         ylabel('acetate a.u.');
         zlabel('v4 a.u.');
@@ -112,7 +120,8 @@ for ip = 1:npar
         grid on
 %         set(0,'CurrentFigure',hfig3);
 %         set(gca,'NextPlot','add');
-        bifurcationPlot([alleqpts;allflux(5,:);allpvec(:,ap)'],s1.s1,recalcdata.f1,[5 1 4],[],1,hfig3);
+        bifurcationPlot([alleqpts;allflux(5,:);allpvec(:,ap)'],...
+                        s1.s1,recalcdata.f1,[5 1 4],[],1,hfig3);
 %         line(allpvec(posid,ap)',alleqpts(1,posid),allflux(5,posid));
         xlabel('acetate a.u.');
         ylabel('pep a.u.');
