@@ -15,9 +15,9 @@ iguess = [.1 .1 .1];
 
 npar = length(v4max);
 nbifpts = zeros(npar,1);
-nbifpts(1:4) = 2000;
-nbifpts(4:6) = 10000;
-nbifpts(6:end) = 30000;
+nbifpts(1:4) = 800;
+nbifpts(4:6) = 800;
+nbifpts(7:end) = 1500;
 allpvec = repmat(pvec,npar,1);
 allpvec(:,11) = v4max;
 tspan = 0:0.1:500;
@@ -28,7 +28,7 @@ for ip = 1:npar
     % run MATCONT
     [data,y,p] =...
     execMATCONT(@KotteMATCONT,@Kottecont_fluxcalc,...
-                xeq1(:,ip),allpvec(ip,:),ap,fluxg,model,800);
+                xeq1(:,ip),allpvec(ip,:),ap,fluxg,model,nbifpts(ip));
     s.(['pt' num2str(ip)]) = data;
 %     % get the mss for y and p
 %     if ~isempty(data)
