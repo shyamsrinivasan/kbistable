@@ -24,11 +24,11 @@ tspan = 0:0.1:500;
 [~,xeq1,~,feq1] = solveODEonly(npar,iguess',model,allpvec,opts,tspan);
 
 for ip = 1:npar
-    pvec = allpvec(ip,:);
+%     pvec = allpvec(ip,:);
     % run MATCONT
     [data,y,p] =...
     execMATCONT(@KotteMATCONT,@Kottecont_fluxcalc,...
-                xeq1(:,ip),allpvec(ip,:),ap,fluxg,model,nbifpts(ip));
+                xeq1(:,ip),allpvec(ip,:),ap,fluxg,model,800);
     s.(['pt' num2str(ip)]) = data;
 %     % get the mss for y and p
 %     if ~isempty(data)
@@ -65,8 +65,61 @@ for ip = 1:npar
     end
 end
 
+%% 3-d bifurcation diagram - only positive parameter values
+% acetate vs v4max vs pep/v4
+recalcdata = struct();
+hfig1 = figure;
+hfig2 = figure;
+hfig3 = figure;
+hold on
+for ip = 1:npar    
+    if ismember(ip,mssid)        
+        s1 = s.(['pt' num2str(ip)]);
+        % get only positive parameters
+        posid = s1.x1(end,:)>=0;
+%         posend = find(posid,1,'last');
+        % get all parameters
+        npts = size(s1.x1,2);
+        allpvec = repmat(pvec,npts,1);
+        allpvec(:,11) = v4max(ip);      
+        allpvec(:,ap) = s1.x1(end,:);
+        alleqpts = s1.x1(1:3,:);
+        allflux = s1.flux(1:5,:);
+        recalcdata.x1 = alleqpts;
+        recalcdata.flux = s1.flux;
+        % recalculate stability info
+        for ipos = 1:npts
+            model.PM(ac-length(xeq)) = allpvec(ipos,ap);
+            recalcdata.f1(:,ipos) =...
+            stabilityInfo(@Kotte_givenNLAE,alleqpts(:,ipos)',model,allpvec(ipos,:));
+        end
+        % draw 3-d bifurcation plot
+%         bifurcationPlot([alleqpts;allpvec(:,9)';allpvec(:,ap)'],s1.s1,recalcdata.f1,[4 5 1],[],1,hfig);
+        bifurcationPlot([alleqpts;allpvec(:,11)';allpvec(:,ap)'],s1.s1,recalcdata.f1,[4 5 1],[],1,hfig1);
+        xlabel('V4max a.u.');
+        ylabel('acetate a.u.');
+        zlabel('pep a.u.');
+        view([116 22]);
+        grid on
+        bifurcationPlot([allflux;allpvec(:,11)';allpvec(:,ap)'],s1.s1,recalcdata.f1,[6 7 5],[],1,hfig2);
+        xlabel('V4max a.u.');
+        ylabel('acetate a.u.');
+        zlabel('v4 a.u.');
+        view([116 22]);
+        grid on
+%         set(0,'CurrentFigure',hfig3);
+%         set(gca,'NextPlot','add');
+        bifurcationPlot([alleqpts;allflux(5,:);allpvec(:,ap)'],s1.s1,recalcdata.f1,[5 1 4],[],1,hfig3);
+%         line(allpvec(posid,ap)',alleqpts(1,posid),allflux(5,posid));
+        xlabel('acetate a.u.');
+        ylabel('pep a.u.');
+        zlabel('v4 a.u.');
+        view([116 22]);
+        grid on
+    end
+end
 
-% find equilibrium solution
+
 
 
 
