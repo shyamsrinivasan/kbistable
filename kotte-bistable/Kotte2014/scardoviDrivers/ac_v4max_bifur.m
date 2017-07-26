@@ -42,13 +42,22 @@ end
 
 %% print bifurcation diagrams for all mss pts
 figh = figure;
+figh2 = figure;
 for ip = 1:npar
     if ismember(ip,mssid)
         % draw bifurcation diagram
         str_data = s.(['pt' num2str(ip)]);
         figh = bifurcationPlot(str_data.x1,str_data.s1,str_data.f1,[4,1],[],[],figh);
+        figh2 = bifurcationPlot([str_data.flux;str_data.x1(end,:)],...
+                                str_data.s1,str_data.f1,[6,5],[],[],figh2);
     end
 end
+set(0,'CurrentFigure',figh);
+line([0 0],[0 6],'LineStyle','--','Color',[0 0 1]);
+line([0 1],[0 0],'LineStyle','--','Color',[0 0 1]);
+set(0,'CurrentFigure',figh2);
+line([0 0],[0 1],'LineStyle','--','Color',[0 0 1]);
+line([0 1],[0 0],'LineStyle','--','Color',[0 0 1]);
 
 %% 3-d bifurcation diagram - only positive parameter values
 % acetate vs v4max vs pep/v4
@@ -80,13 +89,13 @@ for ip = 1:npar
         end
         % draw 3-d bifurcation plot
 %         bifurcationPlot([alleqpts;allpvec(:,9)';allpvec(:,ap)'],s1.s1,recalcdata.f1,[4 5 1],[],1,hfig);
-        posbifurplot([alleqpts;allpvec(:,9)';allpvec(:,ap)'],s1.s1,recalcdata.f1,[4 5 1],[],1,hfig1);
+        bifurcationPlot([alleqpts;allpvec(:,9)';allpvec(:,ap)'],s1.s1,recalcdata.f1,[4 5 1],[],1,hfig1);
         xlabel('acetate a.u.');
         ylabel('V4max a.u.');
         zlabel('pep a.u.');
         view([116 22]);
         grid on
-        posbifurplot([allflux;allpvec(:,9)';allpvec(:,ap)'],s1.s1,recalcdata.f1,[6 7 5],[],1,hfig2);
+        bifurcationPlot([allflux;allpvec(:,9)';allpvec(:,ap)'],s1.s1,recalcdata.f1,[6 7 5],[],1,hfig2);
         xlabel('acetate a.u.');
         ylabel('V4max a.u.');
         zlabel('v4 a.u.');
@@ -94,7 +103,7 @@ for ip = 1:npar
         grid on
 %         set(0,'CurrentFigure',hfig3);
 %         set(gca,'NextPlot','add');
-        posbifurplot([alleqpts;allflux(5,:);allpvec(:,ap)'],s1.s1,recalcdata.f1,[5 1 4],[],1,hfig3);
+        bifurcationPlot([alleqpts;allflux(5,:);allpvec(:,ap)'],s1.s1,recalcdata.f1,[5 1 4],[],1,hfig3);
 %         line(allpvec(posid,ap)',alleqpts(1,posid),allflux(5,posid));
         xlabel('V4max a.u.');
         ylabel('pep a.u.');
@@ -104,5 +113,11 @@ for ip = 1:npar
     end
 end
 % axis([0 2.5 0 1.6 0 1.6]);
+
+%% save figures
+% gcf
+fname = 'C:\Users\shyam\Documents\Courses\CHE1125Project\Results\kottedesign\v4max_cont_curves\pep_v4_v4max_ac_july26';
+print('-depsc','-painters','-loose',fname)
+
 
 
