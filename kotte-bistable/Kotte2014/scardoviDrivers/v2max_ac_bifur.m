@@ -133,7 +133,7 @@ end
 
 %% save figures
 % gcf
-% fname = 'C:\Users\shyam\Documents\Courses\CHE1125Project\Results\kottedesign\cont_curves\pep_v4_ac_july25';
+% fname = 'C:\Users\shyam\Documents\Courses\CHE1125Project\Results\kottedesign\ac_cont_curves\pep_v4_ac_v2max_july26';
 % print('-depsc','-painters','-loose',fname)
 
 
