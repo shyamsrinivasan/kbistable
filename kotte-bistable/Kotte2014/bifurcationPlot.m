@@ -99,7 +99,7 @@ end
 if ~isempty(LineP)
     set(hl,LineP);
 else
-    set(hl,'LineWidth',3);
+    set(hl,'LineWidth',1.5);
 end
 
 if size(LPval,1)>4
