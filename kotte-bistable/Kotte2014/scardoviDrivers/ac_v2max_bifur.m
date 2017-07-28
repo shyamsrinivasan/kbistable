@@ -116,7 +116,7 @@ end
 
 %% save figures
 % gcf
-% fname = 'C:\Users\shyam\Documents\Courses\CHE1125Project\Results\kottedesign\v4max_cont_curves\pep_v4_v4max_ac_july26';
+% fname = 'C:\Users\shyam\Documents\Courses\CHE1125Project\Results\kottedesign\v2max_cont_curves\pep_v4_v2max_ac_july26';
 % print('-depsc','-painters','-loose',fname)
 
 
